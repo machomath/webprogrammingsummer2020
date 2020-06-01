@@ -1,0 +1,37 @@
+@font-face {
+  font-family: 'Yellowtail', cursive;
+  src: url(./Yellowtail/Yellowtail-Regular.ttf);
+}
+h1{
+  text-align: center;
+  font-size: 4em;
+  font-weight: bold;
+  color: red;
+  font-family:  serif sans-serif;
+}
+h2{
+  font-family: 'Tenali Ramakrishna', sans-serif;
+}
+h3{
+  font-family: 'Yellowtail', cursive;
+}
+div{
+  font-size: 0;
+}
+p{
+  background: pink;
+  /* font-size: 32px; */
+  /* font-size: 200%; */
+  /* font-size: 32px; */
+  /* font-size: 2em; */
+}
+#first-para{
+  font-size: 1em;
+}
+#second-para{
+  font-size: 1rem;
+}
+nav a{
+  text-decoration: none;
+  font-weight: bold;
+}
