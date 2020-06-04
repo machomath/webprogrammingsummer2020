@@ -1,0 +1,35 @@
+html{
+  box-sizing: border-box;
+}
+*, *::after, *::before{
+  box-sizing: inherit;
+}
+.container{
+  background: green;
+  width: 60%;
+  height: 600px;
+  border: 5px solid blue;
+  font-size: 0;
+}
+
+.para-in-container{
+  width: 40%;
+  background: skyblue;
+  padding: 10px;
+  border: 5px solid red;
+  text-align: justify;
+  /* margin: 20px auto; */
+  /* display: inline-block; */
+  margin: 20px 6.666%;
+  font-size: 1rem;
+}
+
+.add-margin{
+  /* margin-top: 32px; */
+  /* margin-left: 0; */
+  height: 50px;
+  /* overflow-y: hidden; */
+  overflow-y: scroll;
+  /* display: none; */
+  visibility: hidden;
+}

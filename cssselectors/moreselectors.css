@@ -1,0 +1,7 @@
+article .this-article > p{
+  font-style: italic;
+}
+
+div p:first-of-type{
+  color: red;
+}

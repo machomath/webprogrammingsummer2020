@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Attribute Selector</title>
+    <style media="screen">
+      form[method]{
+        border: 3px solid blue;
+      }
+      form[method="post"]{
+        border: 3px solid red;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <h1>Attribute Selector</h1>
+    <form class="" action="index.html" method="post">
+      <input type="text" name="" placeholder="Full Name">
+      <input type="email" name="" placeholder="Email">
+      <input type="password" name="" placeholder="Password">
+      <button type="button" name="button">Send</button>
+    </form>
+    <hr>
+    <form class="" action="index.html">
+      <input type="text" name="" placeholder="Full Name">
+      <input type="email" name="" placeholder="Email">
+      <input type="password" name="" placeholder="Password">
+      <button type="button" name="button">Send</button>
+    </form>
+    <hr>
+    <form class="" action="index.html" method="get">
+      <input type="text" name="" placeholder="Full Name">
+      <input type="email" name="" placeholder="Email">
+      <input type="password" name="" placeholder="Password">
+      <button type="button" name="button">Send</button>
+    </form>
+
+  </body>
+</html>
