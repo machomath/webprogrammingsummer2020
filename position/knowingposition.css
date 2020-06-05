@@ -1,0 +1,56 @@
+html{
+  box-sizing: border-box;
+}
+*, *::after, *::before{
+  box-sizing: inherit;
+}
+h1{
+  position: sticky;
+  top: 50px;
+  z-index: 10;
+  background: white;
+}
+.img-div{
+  border: 3px solid green;
+  padding: 10px;
+  position: relative;
+  width: 60%;
+  left: 100px;
+}
+.img-div img{
+  width: 100%;
+}
+.img-div h2{
+  position: absolute;
+  bottom: 20px;
+  color: white;
+  left: 50px;
+}
+.btn{
+  display: inline-block;
+  width: 5vw;
+  height: 10vw;
+  position: absolute;
+  bottom: calc(50% - 5vw);
+  font-size: 2vw;
+  background: rgba(205, 205, 205, 0.3);
+  border: none;
+}
+.btn:hover{
+  background: rgba(205, 205, 205, 0.5);
+}
+.btn:active{
+  background: rgba(205, 205, 205, 0.8);
+}
+.btn-right{
+  right: 10px;
+  border-top-left-radius: 5vw;
+  border-bottom-left-radius: 5vw;
+}
+
+.btn-left{
+  /* bottom: 10px;
+  top: 10px; */
+  border-top-right-radius: 5vw;
+  border-bottom-right-radius: 5vw;
+}
