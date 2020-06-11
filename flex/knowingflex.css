@@ -1,0 +1,31 @@
+html{
+  box-sizing: border-box;
+}
+*, *::after, *::before{
+  box-sizing: inherit;
+}
+
+.flex-container{
+  display: flex;
+  background: lightgrey;
+  justify-content: space-between;
+  padding: 20px 40px;
+  flex-wrap: wrap;
+}
+.item{
+  /* margin: 10px; */
+  width: 21%;
+  background: white;
+  margin-bottom: 20px;
+}
+.item img{
+  width: 100%;
+}
+.item p{
+  text-align: justify;
+  padding: 10px;
+}
+
+.item h2{
+  padding-left: 10px;
+}
