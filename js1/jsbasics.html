@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="master.css">
+  </head>
+  <body>
+    <h1>Knowing JS</h1>
+    <form>
+      <div class="form-group">
+        <label for="First Number">First Number</label>
+        <input type="number" class="form-control" placeholder="Enter the first number">
+      </div>
+      <div class="form-group">
+        <label for="Second Number">Second Number</label>
+        <input type="number" class="form-control" placeholder="Enter the second number">
+      </div>
+      <button type="button" class="btn btn-success">Compute</button>
+      <p>The result is: <span id="result-span"></span></p>
+    </form>
+    <script type="text/javascript">
+      var inputs = document.querySelectorAll('input[type="number"]');
+      // console.log(inputs);
+      var computeButton = document.querySelector('button.btn.btn-success');
+      var result = document.getElementById("result-span");
+      computeButton.addEventListener("click", function () {
+        var firstNumber = inputs[0].value;
+        var secondNumber = inputs[1].value;
+        result.innerHTML = secondNumber - firstNumber;
+        inputs[0].value = "";
+        inputs[1].value = "";
+      });
+
+      //result.innerHTML = "<b>" + (y - x) + "</b>";
+      // console.log(result);
+      // console.log(y-x);
+      //alert(y-x);
+    </script>
+  </body>
+</html>
