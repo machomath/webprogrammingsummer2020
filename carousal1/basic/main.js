@@ -3,6 +3,7 @@ let rightButton = document.querySelector("button.right-button");
 let imgDiv = document.querySelector(".img-div");
 let mainImg = document.querySelector(".img-div img");
 let numberOfImages = 5;
+let direction = 1;
 var flipInterval;
 function flipImg(dir) {//dir for direction it can be 1 or -1
   let imgSrc = mainImg.src;
@@ -14,16 +15,18 @@ function flipImg(dir) {//dir for direction it can be 1 or -1
   mainImg.src = imgSrc;
 }
 leftButton.addEventListener("click", function () {
-  flipImg(-1);
+  direction = -1;
+  flipImg(direction);
 });
 
 rightButton.addEventListener("click", function () {
-  flipImg(1);
+  direction = 1;
+  flipImg(direction);
 });
 
 function flipImgFunction() {
   flipInterval = setInterval(function () {
-    flipImg(1);
+    flipImg(direction);
   }, 3000);
 }
 
@@ -35,6 +38,10 @@ imgDiv.addEventListener("mouseover", function () {
 
 imgDiv.addEventListener("mouseout", function () {
   flipImgFunction();
+});
+
+mainImg.addEventListener("click", function () {
+  direction = 0;
 });
 
 
