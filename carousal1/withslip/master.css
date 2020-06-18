@@ -1,0 +1,75 @@
+/* Box model fix */
+html{
+  box-sizing: border-box;
+}
+*, *::after, *::before{
+  box-sizing: inherit;
+}
+/*  */
+.container{
+  width: 80%;
+  margin: 0 auto;
+  padding: 10px;
+  border: 3px solid pink;
+  font-size: 0;
+}
+.img-div{
+  position: relative;
+}
+
+.img-div img:not(.filler){
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.img-div .filler{
+  opacity: 0;
+  width: 100%;
+}
+
+.img-div button{
+  width: 5vw;
+  height: 10vw;
+  font-size: 2vw;
+  position: absolute;
+  bottom: calc(50% - 5vw);
+  border: none;
+  background-color: rgba(205, 205, 205, 0.3);
+}
+.left-button{
+  left: 0;
+  border-top-right-radius: 100% 50%;
+  border-bottom-right-radius: 100% 50%;
+}
+
+.right-button{
+  right: 0;
+  border-top-left-radius: 100% 50%;
+  border-bottom-left-radius: 100% 50%;
+
+}
+.img-div button:hover{
+  background-color: rgba(205, 205, 205, 0.5);
+}
+
+.img-div button:active{
+  background-color: rgba(205, 205, 205, 0.8);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  */
