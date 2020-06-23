@@ -24,13 +24,6 @@ function flipImg(dir) {//dir for direction it can be 1 or -1
     mainImgs[(currentImgIndex - 1*dir + 3)%3].style.zIndex = 10;
     currentImgIndex = (currentImgIndex -dir + 3)%3;
   });
-  // let imgSrc = mainImg.src;
-  // let initImgSrc = imgSrc.slice(0, -5);
-  // let midImgSrc = imgSrc.slice(-5, -4);
-  // let endImgSrc = imgSrc.slice(-4);
-  // midImgSrc = (Number(midImgSrc) + dir + numberOfImages)%numberOfImages;
-  // imgSrc = initImgSrc + midImgSrc + endImgSrc;
-  // mainImg.src = imgSrc;
 }
 leftButton.addEventListener("click", function () {
   direction = -1;
