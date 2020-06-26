@@ -1,0 +1,27 @@
+nav{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 3vw;
+  background: skyblue;
+
+}
+
+nav a{
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.this-page{
+  color: brown;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  padding: 20px;
+  margin: auto;
+  border: 3px solid pink;
+}
