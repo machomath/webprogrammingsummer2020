@@ -1,0 +1,10 @@
+<%- include("./partials/head") -%>
+    <h1>Now this is a complete file being rendered</h1>
+    <form class="" action="/" method="post">
+      <input type="text" name="q" placeholder="City" required>
+      <button type="submit" name="button">Get Weather</button>
+    </form>
+    <div class="weather">
+      <%= response  %>
+    </div>
+<%- include("./partials/foot") -%>

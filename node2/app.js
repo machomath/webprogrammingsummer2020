@@ -1,31 +1,48 @@
 const express = require('express');
+const https = require('https');
+const apiId = require('./keys.js');
 const app = express();
 app.use(express.static(__dirname + "/public"));//to serve src,href
 app.use(express.urlencoded({ extended: true })); //previously we used to use body-parser but not anymore.
 
+app.set('view engine', 'ejs');//ejs tries to find "views" folder and serve views out of that folder
+
 app.get("/", function (req, res) {
-  res.sendFile(__dirname + "/views/index.html");
+  res.render("index", {response: null});
 });
 
 app.get("/common", function (req, res) {
-  res.sendFile(__dirname + "/views/common.html");
+  res.render("common");
 });
 
 app.get("/mywall", function (req, res) {
-  res.sendFile(__dirname + "/views/mywall.html");
+  res.render("mywall");
 });
 
 app.get("/me", function (req, res) {
-  res.sendFile(__dirname + "/views/me.html");
+  res.render("me");
 });
 
 app.get("*", function (req, res) {
   res.sendFile(__dirname + "/views/page-not-found.html");
+  //this one was kept as .html just for students reference
 });
 
 app.post("/", function (req, res) {
   console.log(req.body);
-  res.redirect("/");
+  ///////////
+  var city = req.body.q;
+  var units = "metric";
+  const url = "https://api.openweathermap.org/data/2.5/weather?units=" + units + "&appid=" + apiId + "&q=" + city;
+  //////////
+  https.get(url, function (response) {
+    response.on('data', function (data) {
+      res.render("index", {response: data});
+    });
+    response.on('error', (e) => {
+        console.error(e);
+      });
+  });
 });
 
 app.listen(3000, function () {
