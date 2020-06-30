@@ -5,6 +5,12 @@
       <button type="submit" name="button">Get Weather</button>
     </form>
     <div class="weather">
-      <%= response  %>
+      <% let data = response  %>
+      <% data = JSON.parse(data) %>
+      <% if(data.name != undefined ){ %>
+        <h2><%= data.name  %></h2>
+        <p> <%= data.weather[0].main %> with a temperature of <%= data.main.temp %> C </p>
+        <img src="https://openweathermap.org/img/wn/<%= data.weather[0].icon %>@2x.png" alt="Weather Icon">
+      <% } %>
     </div>
 <%- include("./partials/foot") -%>

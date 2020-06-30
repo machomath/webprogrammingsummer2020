@@ -1,6 +1,7 @@
 const express = require('express');
 const https = require('https');
 const apiId = require('./keys.js');
+const getWeather = require('./modules/httprequest.js');
 const app = express();
 app.use(express.static(__dirname + "/public"));//to serve src,href
 app.use(express.urlencoded({ extended: true })); //previously we used to use body-parser but not anymore.
@@ -8,7 +9,7 @@ app.use(express.urlencoded({ extended: true })); //previously we used to use bod
 app.set('view engine', 'ejs');//ejs tries to find "views" folder and serve views out of that folder
 
 app.get("/", function (req, res) {
-  res.render("index", {response: null});
+  res.render("index", {response: JSON.stringify({name: null})});
 });
 
 app.get("/common", function (req, res) {
@@ -35,14 +36,7 @@ app.post("/", function (req, res) {
   var units = "metric";
   const url = "https://api.openweathermap.org/data/2.5/weather?units=" + units + "&appid=" + apiId + "&q=" + city;
   //////////
-  https.get(url, function (response) {
-    response.on('data', function (data) {
-      res.render("index", {response: data});
-    });
-    response.on('error', (e) => {
-        console.error(e);
-      });
-  });
+  https.get(url, getWeather(res));
 });
 
 app.listen(3000, function () {
