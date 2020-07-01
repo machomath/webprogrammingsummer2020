@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>These are express related notes </h1>
+    <pre>
+      Get Node LTS version installed https://nodejs.org/en/download/
+      express http://expressjs.com/en/starter/installing.html
+      See an example http://expressjs.com/en/starter/hello-world.html
+
+      make a project folder, cd to the project folder
+      make a file with the name preferably server.js or app.js
+      npm init
+      npm install express
+
+      See an example http://expressjs.com/en/starter/hello-world.html
+      copy the example and paste it in server.js
+      ////////////////////////////
+      const express = require('express');
+      const bodyParser = require('body-parser');//no need to have body-parser now
+
+      const app = express();
+
+      app.get("/", function (req, res) {
+        res.write("<h1>Hello</h1>")
+        res.send();
+      });
+
+      app.listen(process.env.PORT || 3000, function () {
+        console.log("Server is running at port 3000 or as allocated by Heroku");
+      });
+      ///////////////////////////
+      node app.js
+      In the browser go to http://localhost:3000/ and get Hello World
+      ..........
+      if the node_modules folder is deleted then first run
+      npm install
+      ..........
+      Now populate index.html file
+      Now for the post the form action attribute should be "/" instead of index.html
+      Look express API reference http://expressjs.com/en/4x/api.html
+      look for res.sendFile(__dirname + "/fileName")
+      ---------
+      app.use(express.static(__dirname + "/public"));//to serve src,href
+      the above static route is used as
+      <link href="css/styles.css" rel="stylesheet">
+      i.e. without the mention of public folder in the src or href
+      ---------
+      To handle post without body-parser
+      app.use(express.urlencoded({ extended: true })); //Parse URL-encoded bodies
+      ....
+      Note: There is
+      app.use(express.json()); //Used to parse JSON bodies
+      tried it for AJAX, AJAX works without this line
+      ....
+      Make a humble post route
+      app.post("/", function (req, res) {
+        console.log(req.body);
+        res.redirect("/");
+      });
+      ----------
+      <b>No need to have body-parser anymore</b>
+      add body parser by npm install body-parser
+      const bodyParser = require('body-parser');
+      app.use(bodyParser.urlencoded({extended: true}));
+      also add the app.post function
+      ------------
+      ////////////
+      -----------
+      EJS or Embedded Javascript Templating is a templating engine
+      https://ejs.co/
+      see various ejs tags
+      (go to using EJS with express, github page)
+      https://github.com/mde/ejs/wiki/Using-EJS-with-Express
+      npm install ejs (same as npm i ejs)
+      (EJS sample code assumes a views directory containing an index.ejs page)
+      so create a folder views, while the name of index.ejs can be different
+      so we create list.ejs
+      (we can start populating list.ejs by the basic html skelton code)
+      to set view engine
+      app.set('view engine', 'ejs');
+      ============
+      EJS Layouts
+      If we have so many differnt pages with common things like
+      header and footer we need to explore ejs layput
+      Again go to https://ejs.co/ and look for Layouts
+
+      go to views folder and there create header.ejs and footer.ejs
+      so it is basically putting html in files like header.ejs and
+      footer.ejs
+      and the including them by using ejs tag
+      <%- include("header") -%>
+      Ofcourse as you make more pages you need to go to app.js and
+      create more routes
+      ----
+      ejs marker is like this
+      <%= ejsVariable %>
+      where ejsVariable comes from res.render("viewNme",{JS Obj});
+      ........
+      We can even execute code in a .ejs file
+      by using <% JS code %> on line by line bases
+      ==============
+      --------------
+      To send an API request from the server
+      const https = require('https'); //it does not need npm i since it is native
+
+      https.get(url, function (response) {
+        response.on("data", function (data) {
+      ---------------
+      ////////////////
+      Express validator
+      npm install express-validator
+      const { body, validationResult } = require('express-validator');
+      (I will work on it later)
+      ----------------
+      ==================
+      //////////////////
+      =================
+      Mongo DB
+      https://www.mongodb.com/try
+      Community Servers
+      https://www.mongodb.com/try/download/community
+      Select the current version and MSI format
+      Download .msi file
+      Go to downloads folder and
+      start installation + MongoDB Compass (GUI for MongoDB)
+      Go to the folder where we installed MongoDb
+      C:\Program Files\MongoDB\Server\4.4\bin
+      (If we double click the mongo.exe mongod.exe they run)
+      create shortcuts for mongod.exe and mongo.exe on the desktop
+      (Search Mongodb compass community and it runs)
+      Now to run mongodb first run mongod.exe it strats mongo server (it shows something like waiting for connection etc etc)
+      And then run mongo.exe a command prompt like > will show
+      ------------
+      =============
+      Mongoose
+      https://mongoosejs.com/
+      https://mongoosejs.com/docs/guide.html
+
+      npm i mongoose
+
+      The BoilerPlate code is just
+      const mongoose = require('mongoose');
+      mongoose.connect('mongodb://localhost:27017/testDB',
+      {useNewUrlParser: true, useUnifiedTopology: true});
+      //testDB is the name of DB
+
+      Before we go further atleast read the quickstart documentation
+      https://mongoosejs.com/docs/index.html
+
+      const db = mongoose.connection;
+      db.on('error', console.error.bind(console, 'connection error:'));
+      db.once('open', function() {
+        // we're connected!
+        //They suggest write rest of the code in here yet I have not seen this
+        //practice
+      });
+
+      Now strat creating schemas like
+      const kittySchema = new mongoose.Schema({
+        name: String
+      });
+
+      If we want to add some method to the schema so that every instance
+      of
+      kittySchema.methods.speak = function () {
+        const greeting = this.name
+          ? "Meow name is " + this.name
+          : "I don't have a name";
+        console.log(greeting);
+      }
+
+      Then create a model, i.e. a class
+      const Kitten = mongoose.model('Kitten', kittySchema);
+      (it also creates a DB collection with the name "kittens" )
+
+      Now we can create a new instance of the class
+      const myFluffy = new Kitten({ name: 'fluffy' });
+      ...and use the methods like
+      myFluffy.speak(); // "Meow name is fluffy"
+      (But nothing has gone to DB till now)
+
+      To save it as a document into DB directly from the instance
+      myFluffy.save(function (err, fluffy) {
+        if (err) return console.error(err);
+        fluffy.speak();
+      });
+      (There are three more methods to save by using the model )
+
+      Now to query from DB
+      ...to get all documents
+      Kitten.find(function (err, kittens) {
+        if (err) return console.error(err);
+        console.log(kittens);
+      });
+
+      ... to get selected documents
+      Kitten.find({ name: /^fluff/ }, callback);
+      Like the above one performs a search for all documents with a name
+      property that begins with "fluff" and returns the result as an
+      array of kittens to the callback.
+
+
+
+
+
+
+
+      for CRUD
+      https://mongoosejs.com/docs/models.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </pre>
+
+  </body>
+</html>

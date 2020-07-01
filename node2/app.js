@@ -1,10 +1,13 @@
 const express = require('express');
 const https = require('https');
 const apiId = require('./keys.js');
+const mongoose = require('mongoose');
 const getWeather = require('./modules/httprequest.js');
 const app = express();
 app.use(express.static(__dirname + "/public"));//to serve src,href
 app.use(express.urlencoded({ extended: true })); //previously we used to use body-parser but not anymore.
+mongoose.connect('mongodb://localhost:27017/testWPDB',
+{useNewUrlParser: true, useUnifiedTopology: true});
 
 app.set('view engine', 'ejs');//ejs tries to find "views" folder and serve views out of that folder
 
@@ -37,6 +40,10 @@ app.post("/", function (req, res) {
   const url = "https://api.openweathermap.org/data/2.5/weather?units=" + units + "&appid=" + apiId + "&q=" + city;
   //////////
   https.get(url, getWeather(res));
+});
+
+app.post("/signup", function (req, res) {
+  res.send(JSON.stringify({msg: req.body}));
 });
 
 app.listen(3000, function () {
