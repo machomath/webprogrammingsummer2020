@@ -1,13 +1,11 @@
 const express = require('express');
 const https = require('https');
+const User = require('./modules/user.js');
 const apiId = require('./keys.js');
-const mongoose = require('mongoose');
 const getWeather = require('./modules/httprequest.js');
 const app = express();
 app.use(express.static(__dirname + "/public"));//to serve src,href
 app.use(express.urlencoded({ extended: true })); //previously we used to use body-parser but not anymore.
-mongoose.connect('mongodb://localhost:27017/testWPDB',
-{useNewUrlParser: true, useUnifiedTopology: true});
 
 app.set('view engine', 'ejs');//ejs tries to find "views" folder and serve views out of that folder
 
@@ -42,8 +40,22 @@ app.post("/", function (req, res) {
   https.get(url, getWeather(res));
 });
 
+
 app.post("/signup", function (req, res) {
-  res.send(JSON.stringify({msg: req.body}));
+  //we want to create the account
+  const newUser = new User({
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password
+  });
+  newUser.save(function (err) {
+    if (err) {
+      return handleError(err);
+    }else{
+      res.send(JSON.stringify({msg: "Success"}));
+    }
+  });
+
 });
 
 app.listen(3000, function () {
